@@ -16,6 +16,7 @@ import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.boot.webmvc.test.autoconfigure.WebMvcTest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Import;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 
 import p466.taco_cloud.data.IngredientRepository;
@@ -41,6 +42,7 @@ public class DesignTacoControllerTest {
     }
 
     @Test
+    @WithMockUser(roles = "USER")
     public void testShowDesignForm() throws Exception {
 
         when(ingredientRepo.findAll()).thenReturn(Arrays.asList(

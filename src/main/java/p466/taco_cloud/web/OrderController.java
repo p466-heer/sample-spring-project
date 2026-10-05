@@ -1,5 +1,6 @@
 package p466.taco_cloud.web;
 
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.support.SessionStatus;
 
 import jakarta.validation.Valid;
 import p466.taco_cloud.TacoOrder;
+import p466.taco_cloud.User;
 import p466.taco_cloud.data.OrderRepository;
 
 @Controller
@@ -32,14 +34,16 @@ public class OrderController {
     public String processOrder(
             @Valid TacoOrder order,
             Errors errors,
-            SessionStatus sessionStatus) {
+            SessionStatus sessionStatus,
+            @AuthenticationPrincipal User user) {
 
         if (errors.hasErrors()) {
             return "orderForm";
         }
 
-        orderRepo.save(order);
+        order.setUserId(user.getId());
 
+        orderRepo.save(order);
         sessionStatus.setComplete();
 
         return "redirect:/";

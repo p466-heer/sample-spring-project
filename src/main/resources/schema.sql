@@ -38,3 +38,22 @@ alter table Taco
 alter table Ingredient_Ref
     add foreign key (ingredient)
         references Ingredient(id);
+
+create table if not exists "Users" (
+                                     id identity,
+                                     username varchar(50) not null,
+    password varchar(100) not null,
+    fullname varchar(50) not null,
+    street varchar(50) not null,
+    city varchar(50) not null,
+    state varchar(2) not null,
+    zip varchar(10) not null,
+    phone_number varchar(20) not null
+    );
+
+alter table "Taco_Order"
+    add column if not exists user_id bigint;
+
+alter table "Taco_Order"
+    add foreign key (user_id)
+        references "Users"(id);

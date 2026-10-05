@@ -24,6 +24,8 @@ public class TacoOrder implements Serializable {
     @Id
     private Long id;
 
+    private Long userId;
+
     private Date placedAt = new Date();
 
     @NotBlank(message = "Delivery name is required")

@@ -10,8 +10,7 @@
 
 <h1>Design your taco!</h1>
 
-<form method="POST" th:object="${taco}">
-
+<form method="POST" th:action="@{/design}" th:object="${taco}">
     <div>
         <h3>Designate your wrap:</h3>
 
